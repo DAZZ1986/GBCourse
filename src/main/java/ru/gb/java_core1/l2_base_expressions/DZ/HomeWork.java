@@ -1,4 +1,4 @@
-package ru.bg.java_core1.l2_base_expressions.DZ;
+package ru.gb.java_core1.l2_base_expressions.DZ;
 
 public class HomeWork {
 

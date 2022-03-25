@@ -1,4 +1,4 @@
-package ru.bg.java_core1.l2_base_expressions;
+package ru.gb.java_core1.l2_base_expressions;
 
 public class Classwork {
 
