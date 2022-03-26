@@ -17,7 +17,7 @@ public class HomeWork {
                 arr1[i] = 1;
         }
         System.out.println(Arrays.toString(arr1));
-*/
+*/   
 /*
         //Task 2
         int[] arr2 = new int[100];
