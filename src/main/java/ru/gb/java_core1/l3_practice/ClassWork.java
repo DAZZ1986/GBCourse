@@ -18,7 +18,7 @@ public class ClassWork {
     public static void main(String[] args){
 
         System.out.println("Lesson 3");
-/*
+
         int[] arr = createArrayWithRandomValues(15);
         System.out.println(Arrays.toString(arr));
 
@@ -32,7 +32,7 @@ public class ClassWork {
         System.out.println(randomDouble);
 
         System.out.println(Math.random());
-*/
+
 /*
         //Scanner
         //Scanner scanner = new Scanner(System.in);
@@ -68,24 +68,24 @@ public class ClassWork {
 */
 
         //Многомерные массивы
-        int[][] arr = new int[3][3];
-        arr[1][1] = 5;
-        arr[2][2] = 8;
+        int[][] arr5 = new int[3][3];
+        arr5[1][1] = 5;
+        arr5[2][2] = 8;
         //print2dArray(arr);
         //System.out.println(Arrays.deepToString(arr));
 
-        int[][] arr2 = new int[3][];
-        arr2[0] = new int[10];
-        arr2[1] = new int[5];
-        arr2[2] = new int[14];
+        int[][] arr6 = new int[3][];
+        arr6[0] = new int[10];
+        arr6[1] = new int[5];
+        arr6[2] = new int[14];
 
-        int[][] arr3 = {
+        int[][] arr7 = {
                 {1,2,3,4},
                 {1,2},
                 {1,2,3,423,3524,234},
                 {1,2,3,4}
         };
-        print2dArray(arr3);
+        print2dArray(arr7);
 
 
     }
