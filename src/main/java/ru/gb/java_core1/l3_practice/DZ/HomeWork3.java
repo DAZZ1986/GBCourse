@@ -1,8 +1,6 @@
 package ru.gb.java_core1.l3_practice.DZ;
 
-import java.util.Arrays;
-
-public class HomeWork {
+public class HomeWork3 {
     public static int startCompare = 0;
     public static int endCompare = 0;
 
@@ -17,7 +15,7 @@ public class HomeWork {
                 arr1[i] = 1;
         }
         System.out.println(Arrays.toString(arr1));
-*/   
+*/
 /*
         //Task 2
         int[] arr2 = new int[100];
@@ -45,7 +43,6 @@ public class HomeWork {
                     arr4[i][j] = 1;
             }
         }
-        print2dArray(arr4);
 
         int jMax = arr4.length - 1;
         for (int i = 0; i < arr4.length; i++) {
