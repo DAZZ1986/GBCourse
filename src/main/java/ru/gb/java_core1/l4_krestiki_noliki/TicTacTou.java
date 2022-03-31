@@ -36,7 +36,8 @@ public class TicTacTou {
             playRound();
 
             System.out.printf("SCORE:     HUMAN     AI\n" +
-                    "             %d      %d\n", scoreHuman, scoreAi);
+                    "             %d       %d\n", scoreHuman, scoreAi);
+
             System.out.print("Want to play again ? (Y or N) >>> ");
 
             if(!scanner.next().toLowerCase(Locale.ROOT).equals("y")) {
@@ -48,7 +49,23 @@ public class TicTacTou {
 
     private static void playRound() {
         System.out.printf("Round %d start\n", ++roundCounter);
-        initField(3, 3);
+
+        int sizeX;
+        int sizeY;
+
+        do {
+            System.out.print("Введите размер поля по X: ");
+            sizeX = scanner.nextInt();
+            System.out.print("Введите размер поля по Y: ");
+            sizeY = scanner.nextInt();
+            System.out.print("Введите: 0 и нажмите Enter");
+
+        } while(!scanner.hasNextInt());
+
+        initField(sizeX, sizeY);
+
+        //initField(3, 3);
+
         printField();
         if(dotHuman == DOT_X) {
             humanFirst();
@@ -72,7 +89,6 @@ public class TicTacTou {
 
         }
     }
-
     private static void aiFirst() {
         while(true) {
             aiTurn();
@@ -88,6 +104,7 @@ public class TicTacTou {
         }
     }
 
+
     private static boolean gameCheck(char dot) {
         if(checkWin(dot) && dot == dotHuman) {
             System.out.println("Human win!");
@@ -101,6 +118,7 @@ public class TicTacTou {
         return checkDraw();
     }
 
+
     private static void chooseDot() {
         System.out.print("Type 'X' to play with X and for '0' type anything >>> ");
 
@@ -113,6 +131,7 @@ public class TicTacTou {
         }
     }
 
+
     private static void aiTurn() {
         int x;
         int y;
@@ -123,7 +142,6 @@ public class TicTacTou {
 
         field[y][x] = dotAi;
     }
-
     private static void humanTurn() {
         int x;
         int y;
@@ -136,20 +154,51 @@ public class TicTacTou {
         field[y][x] = dotHuman;
     }
 
+
     private static boolean checkWin(char dot) {
+
+        //hor
+        for (int i = 0; i < fieldSizeY; i++) {
+            for (int j = 0; j < fieldSizeX; j++) {
+                if (field[i][j] != dot) return false;
+            }
+        }
+
+        //ver
+        for (int i = 0; i < fieldSizeY; i++) {
+            for (int j = 0; j < fieldSizeX; j++) {
+                if (field[j][i] != dot) return false;
+            }
+        }
+        //diag
+        for (int i = 0; i < fieldSizeY; ) {
+            for (int j = 0; j < fieldSizeX; i++, j++) {
+                if (field[i][j] != dot) return false;
+            }
+            break;
+        }
+        for (int x = fieldSizeX; x >= 0; ) {
+            for (int y = 0; y < fieldSizeY; y++) {
+                if (field[x][y] != dot) return false;
+                x--;
+            }
+            break;
+        }
+
+/*
         //hor
         if(field[0][0] == dot && field[0][1] == dot && field[0][2] == dot) return true;
         if(field[1][0] == dot && field[1][1] == dot && field[1][2] == dot) return true;
-        if(field[2][0] == dot && field[2][1] == dot && field[1][2] == dot) return true;
+        if(field[2][0] == dot && field[2][1] == dot && field[2][2] == dot) return true;
         //ver
         if(field[0][0] == dot && field[1][0] == dot && field[2][0] == dot) return true;
         if(field[0][1] == dot && field[1][1] == dot && field[2][1] == dot) return true;
         if(field[0][2] == dot && field[1][2] == dot && field[2][2] == dot) return true;
         //diag
         if(field[0][0] == dot && field[1][1] == dot && field[2][2] == dot) return true;
-        if(field[0][2] == dot && field[1][1] == dot && field[2][0] == dot) return true;
-
-        return false;
+        if(field[2][0] == dot && field[1][1] == dot && field[0][2] == dot) return true;
+*/
+        return true;
     }
 
     private static boolean checkDraw() {
@@ -167,6 +216,9 @@ public class TicTacTou {
     private static boolean isCellValid(int y, int x) {
         return x >= 0 && y >= 0 && x < fieldSizeX && y < fieldSizeY && field[y][x] == DOT_EMPTY;
     }
+
+
+
 
     private static void initField(int sizeX, int sizeY) {
         fieldSizeY = sizeY;
