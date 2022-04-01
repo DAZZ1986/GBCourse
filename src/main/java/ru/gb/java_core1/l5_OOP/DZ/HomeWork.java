@@ -19,7 +19,9 @@ public class HomeWork {
         employersArray[3] = new Employer("Denis", "Sidorov", "Denis@yandex.ru", 877123777, 15000, 45 );
         employersArray[4] = new Employer("Igor", "Lokov", "Igor@yandex.ru", 877123777, 5000, 35 );
 
+        System.out.println("_________________________");
         System.out.println("Сотрудники старше 40 лет.");
+        System.out.println("_________________________");
         for (int i = 0; i < employersArray.length; i++) {
             if(employersArray[i].age > 40 ){
                 employersArray[i].infoObject();
