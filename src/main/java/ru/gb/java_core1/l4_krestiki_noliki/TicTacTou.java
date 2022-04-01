@@ -24,9 +24,14 @@ public class TicTacTou {
     private static int winLength;
 
 
+
+
+
+
+
+
     public static void main(String[] args) {
         startNewGame();
-
     }
 
 
@@ -38,8 +43,8 @@ public class TicTacTou {
             System.out.printf("SCORE:     HUMAN     AI\n" +
                     "             %d       %d\n", scoreHuman, scoreAi);
 
-            System.out.print("Want to play again ? (Y or N) >>> ");
 
+            System.out.print("Want to play again ? (Y or N) >>> ");
             if(!scanner.next().toLowerCase(Locale.ROOT).equals("y")) {
                 System.out.println("BYE");
                 break;
@@ -50,9 +55,9 @@ public class TicTacTou {
     private static void playRound() {
         System.out.printf("Round %d start\n", ++roundCounter);
 
-        int sizeX;
+        int sizeX = -0;
         int sizeY;
-
+/*
         do {
             System.out.print("Введите размер поля по X: ");
             sizeX = scanner.nextInt();
@@ -62,6 +67,27 @@ public class TicTacTou {
 
         } while(!scanner.hasNextInt());
 
+        initField(sizeX, sizeY);
+*/
+        boolean check = true;
+
+        while(check) {
+            try {
+                check = false; //ставим false, что бы не вводить больше данные
+                System.out.println("Введите размер поля (нечетное число): ");
+                sizeX = scanner.nextInt();
+
+                if (sizeX % 2 == 0) {
+                    check = true;
+                    System.out.println("Неверное значение - введите нечетное число повторно!");
+                }
+            } catch(Exception ex) {
+                System.out.println("Неверное значение - введите нечетное число повторно!");
+                check = true; //если вышло исключение, ставим обратно true, что бы опять вводить данные
+            }
+        }
+
+        sizeY = sizeX;
         initField(sizeX, sizeY);
 
         //initField(3, 3);
@@ -86,7 +112,6 @@ public class TicTacTou {
             if (gameCheck(dotAi)) {
                 break;
             }
-
         }
     }
     private static void aiFirst() {
@@ -104,7 +129,7 @@ public class TicTacTou {
         }
     }
 
-
+    //проверка победы
     private static boolean gameCheck(char dot) {
         if(checkWin(dot) && dot == dotHuman) {
             System.out.println("Human win!");
@@ -118,7 +143,7 @@ public class TicTacTou {
         return checkDraw();
     }
 
-
+    //выбор Х или 0
     private static void chooseDot() {
         System.out.print("Type 'X' to play with X and for '0' type anything >>> ");
 
@@ -156,49 +181,82 @@ public class TicTacTou {
 
 
     private static boolean checkWin(char dot) {
-
+        boolean flag = false;
+        int counterX = 0;
+        int counterY = 0;
+        int counterD = 0;
         //hor
-        for (int i = 0; i < fieldSizeY; i++) {
-            for (int j = 0; j < fieldSizeX; j++) {
-                if (field[i][j] != dot) return false;
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (field[y][x] == dot) {
+                    flag = true;
+                    counterX++;
+                    if(counterX == fieldSizeX)
+                        break;
+                }
+                else {
+                    flag = false;
+                    break;
+                }
             }
+            if(counterX == fieldSizeX)
+                break;
         }
 
         //ver
-        for (int i = 0; i < fieldSizeY; i++) {
-            for (int j = 0; j < fieldSizeX; j++) {
-                if (field[j][i] != dot) return false;
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (field[x][y] == dot) {
+                    flag = true;
+                    counterY++;
+                    if(counterY == fieldSizeY)
+                        break;
+                }
+                else {
+                    flag = false;
+                }
             }
+            if(counterY == fieldSizeY)
+                break;
         }
+
         //diag
-        for (int i = 0; i < fieldSizeY; ) {
-            for (int j = 0; j < fieldSizeX; i++, j++) {
-                if (field[i][j] != dot) return false;
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (x == y && field[x][y] == dot) {
+                    flag = true;
+                    counterD++;
+                    y++;
+                    if(counterD == fieldSizeY)
+                        break;
+                }
+                else {
+                    flag = false;
+                }
             }
-            break;
+            if(counterD == fieldSizeY)
+                break;
         }
+        /*//diag 2
         for (int x = fieldSizeX; x >= 0; ) {
             for (int y = 0; y < fieldSizeY; y++) {
-                if (field[x][y] != dot) return false;
+                if (field[y][x] == dot) {
+                    flag = true;
+                }
+                else {
+                    flag = false;
+                    break;
+                }
                 x--;
             }
-            break;
+            if(!flag)
+                break;
         }
-
-/*
-        //hor
-        if(field[0][0] == dot && field[0][1] == dot && field[0][2] == dot) return true;
-        if(field[1][0] == dot && field[1][1] == dot && field[1][2] == dot) return true;
-        if(field[2][0] == dot && field[2][1] == dot && field[2][2] == dot) return true;
-        //ver
-        if(field[0][0] == dot && field[1][0] == dot && field[2][0] == dot) return true;
-        if(field[0][1] == dot && field[1][1] == dot && field[2][1] == dot) return true;
-        if(field[0][2] == dot && field[1][2] == dot && field[2][2] == dot) return true;
-        //diag
-        if(field[0][0] == dot && field[1][1] == dot && field[2][2] == dot) return true;
+        */
+        //diag 2
         if(field[2][0] == dot && field[1][1] == dot && field[0][2] == dot) return true;
-*/
-        return true;
+
+        return flag;
     }
 
     private static boolean checkDraw() {
@@ -213,6 +271,7 @@ public class TicTacTou {
         return true;
     }
 
+    //проверяет возможность установки фишки в указанную ячейку
     private static boolean isCellValid(int y, int x) {
         return x >= 0 && y >= 0 && x < fieldSizeX && y < fieldSizeY && field[y][x] == DOT_EMPTY;
     }
