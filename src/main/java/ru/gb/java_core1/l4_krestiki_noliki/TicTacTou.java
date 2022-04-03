@@ -23,6 +23,18 @@ public class TicTacTou {
     private static int roundCounter;
     private static int winLength;
 
+    //проверка АИ на возможность победы
+    public static char dotCheckWinAI;
+    public static boolean checkWinFlag;
+    public static int YcheckWinCor;
+    public static int XcheckWinCor;
+    public static int aiTurnCounter = 0;
+
+    //проверка АИ на возможность блокирования победы игрока
+    public static char dotBlockWinHuman;
+    public static int humanTurnCounter = 0;
+
+
 /*
 СХЕМА РАБОТЫ ПРОГРАММЫ:
 main(String[] args)
@@ -90,6 +102,8 @@ aiTurn(); ...
             dotHuman = DOT_0;
             dotAi = DOT_X;
         }
+        dotCheckWinAI = dotAi;
+        dotBlockWinHuman = dotHuman;
     }
 
     private static void playRound() {
@@ -171,20 +185,30 @@ aiTurn(); ...
 
 
 
-
+/*
+4. сделать умного аи который проверяет не виграет ли он при след ходе или игрока проверит не выграет ли игрок:
+   а) создать метод проверки на возможность своего выгрыша checkMyChances(),
+   б) создать метод блокировки выгрыша игрока blockWinHuman().
+ */
     private static void aiTurn() {
-        int x;
         int y;
-
-        //метод определения шансов на победу аи, если тут false, то проверяем на блок победы игрока и если там false, то аи ходит рандомно
-        checkMyChances();
-        blockWinHuman();
+        int x;
 
         do {
-            x = random.nextInt(fieldSizeX);
-            y = random.nextInt(fieldSizeY);
+            //метод определения шансов на победу аи, если тут false, то проверяем на блок победы игрока и если там false, то аи ходит рандомно
+            if(aiTurnCounter >= 1 && checkAIWin()) {    //метод проверки на возможность выгрыша AI checkAIWin()
+                y = YcheckWinCor;
+                x = XcheckWinCor;
+            } else if(aiTurnCounter >= 1 && blockWinHuman()) {  //метод блокировки выгрыша игрока blockWinHuman().
+                y = YcheckWinCor;
+                x = XcheckWinCor;
+            } else {
+                y = random.nextInt(fieldSizeY);
+                x = random.nextInt(fieldSizeX);
+            }
         } while (!isCellValid(y, x));   //коммент ниже по данному коду...
 
+        aiTurnCounter++;
         field[y][x] = dotAi;    //коммент ниже по данному коду...
     }
     private static void humanTurn() {
@@ -196,17 +220,55 @@ aiTurn(); ...
             y = scanner.nextInt() - 1;
         } while (!isCellValid(y, x));   //тут мы будем играть пока с метода isCellValid будет возвращаться true, и тут мы его конвертим
                                         //в false, тк как только while() увидит true цикл прервется.
+        humanTurnCounter++;
         field[y][x] = dotHuman;   //устанавливаем фишку игрока после проверки на возможность установки в isCellValid(y, x)
     }
 
 
-    public static boolean checkMyChances() {
+    public static boolean checkAIWin() {
+        checkWinFlag = false;
 
-        return false;
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if(field[y][x] == DOT_EMPTY) {
+                    field[y][x] = dotCheckWinAI;
+                    checkWinFlag = checkWin(dotCheckWinAI);
+                    field[y][x] = DOT_EMPTY;
+
+                    if(checkWinFlag) {
+                        YcheckWinCor = y;
+                        XcheckWinCor = x;
+                        break;
+                    }
+                }
+            }
+            if(checkWinFlag)
+                break;
+        }
+        return checkWinFlag;
     }
 
     public static boolean blockWinHuman() {
-        return false;
+        checkWinFlag = false;
+
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if(field[y][x] == DOT_EMPTY) {
+                    field[y][x] = dotBlockWinHuman;
+                    checkWinFlag = checkWin(dotBlockWinHuman);
+                    field[y][x] = DOT_EMPTY;
+
+                    if(checkWinFlag) {
+                        YcheckWinCor = y;
+                        XcheckWinCor = x;
+                        break;
+                    }
+                }
+            }
+            if(checkWinFlag)
+                break;
+        }
+        return checkWinFlag;
     }
 
     private static boolean checkWin(char dot) {
