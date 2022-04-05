@@ -23,10 +23,14 @@ public class HomeWork {
         System.out.println("Сотрудники старше 40 лет.");
         System.out.println("_________________________");
         for (int i = 0; i < employersArray.length; i++) {
-            if(employersArray[i].age > 40 ){
+            if(employersArray[i].getAge() > 40 ){
                 employersArray[i].infoObject();
             }
         }
+
+
+
+
     }
 
 
