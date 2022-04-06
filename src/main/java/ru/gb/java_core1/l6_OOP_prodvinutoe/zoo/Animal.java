@@ -1,6 +1,7 @@
 package ru.gb.java_core1.l6_OOP_prodvinutoe.zoo;
 
 public abstract class Animal extends Object {
+
     public static final String STATIC_FIELD = "STATIC";
     protected String name;
     protected String color;

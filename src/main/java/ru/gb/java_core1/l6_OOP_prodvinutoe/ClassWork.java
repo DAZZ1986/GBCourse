@@ -24,12 +24,12 @@ public class ClassWork {
         //final в классе мы запрещаем наследовать.
 
 
-        ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Animal[] animals = {
-                new ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Cat("Barsik", "white"),
-                new ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Bird("Chizhik", "yellow"),
-                new ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Dog("Bobik", "black"),
-                new ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Snake("Kaa", "green"),
-                new ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Parrot("Kesha", "blue"),
+        Animal[] animals = {
+                new Cat("Barsik", "white"),
+                new Bird("Chizhik", "yellow"),
+                new Dog("Bobik", "black"),
+                new Snake("Kaa", "green"),
+                new Parrot("Kesha", "blue"),
 //                new Animal("JJJJ", "xkfdmv")
         };
 
@@ -37,12 +37,12 @@ public class ClassWork {
             animals[i].walk();
             animals[i].voice();
 
-            if (animals[i] instanceof ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Bird) {
-                ((ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Bird) animals[i]).fly();
+            if (animals[i] instanceof Bird) {
+                ((Bird) animals[i]).fly();
             }
 
-            if (animals[i] instanceof ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Parrot) {
-                ((ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Parrot) animals[i]).speak();
+            if (animals[i] instanceof Parrot) {
+                ((Parrot) animals[i]).speak();
             }
 
 //            if (i == 0) {
@@ -51,17 +51,17 @@ public class ClassWork {
 //            }
         }
 
-        ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Snake snake = new ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Snake("xfbb", "xfdfgvgfd");
+        Snake snake = new Snake("xfbb", "xfdfgvgfd");
         snake.voice();
         snake.walk();
         snake.walkAsParent();
 
-        System.out.println(ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Animal.STATIC_FIELD);
-        System.out.println(ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Cat.STATIC_FIELD);
-        ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Animal.doStatic();
-        ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Cat.doStatic();
+        System.out.println(Animal.STATIC_FIELD);
+        System.out.println(Cat.STATIC_FIELD);
+        Animal.doStatic();
+        Cat.doStatic();
 
-        ru.gb.java_core1.l6_OOP_prodvinutoe.zoo.Dog.doStatic();
+        Dog.doStatic();
     }
 
 }
