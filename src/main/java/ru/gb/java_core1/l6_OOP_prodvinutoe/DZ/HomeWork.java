@@ -8,21 +8,8 @@ import java.util.Scanner;
 
 public class HomeWork {
 
-    //public static Scanner scanner = new Scanner(System.in);
-
 
     public static void main(String[] args) {
-
-/*
-        System.out.print("Enter number: ");
-        int input = scanner.nextInt();
-        int input2 = input;
-
-        for(int i=0; i < input; i++) {
-            System.out.print(input2 + " ");
-            input2 += input;
-        }
-*/
 
         Dog dog1 = new Dog("Muhtar");
         dog1.Run(500);
@@ -33,6 +20,7 @@ public class HomeWork {
 
         dog1.getDogCounter();
         //Animal.getDogCounter();
+
 
         System.out.println("_____________________________________");
 

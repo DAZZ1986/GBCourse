@@ -28,7 +28,7 @@ public class Dog extends Animal {
         if(length <= 500) {
             System.out.printf("%s пробежал %d\n", name, length);
         } else {
-            System.out.printf("%s столько пробежал не в состоянии!\n");
+            System.out.printf("%s столько пробежать не в состоянии!\n");
         }
     }
 
