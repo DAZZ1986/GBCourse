@@ -147,12 +147,12 @@ public class GameMap extends JPanel {
         g.fillRect(0, getHeight() / 2 - 55, getWidth(), 110);
         g.setColor(Color.YELLOW);
         g.setFont(new Font("Times New Roman", Font.BOLD, 55));
-
+/*
         switch (stateGameOver) {
             case STATE_DRAW -> g.drawString("DRAW", getWidth() / 4, getHeight() / 2);
             case STATE_WIN_HUMAN -> g.drawString("HUMAN WIN", getWidth() / 4, getHeight() / 2);
             case STATE_WIN_AI -> g.drawString("AI WIN", getWidth() / 4, getHeight() / 2);
-        }
+        }*/
 
     }
 
